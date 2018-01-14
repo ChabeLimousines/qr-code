@@ -14,11 +14,19 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Extension;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig_SimpleFunction;
 
 class QrCodeExtension extends Twig_Extension implements ContainerAwareInterface
 {
-    use ContainerAwareTrait;
+    // use ContainerAwareTrait; // not available before Symfony 2.3
+
+    protected $container;
+
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
 
     /**
      * {@inheritdoc}
